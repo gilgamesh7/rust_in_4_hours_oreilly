@@ -1,6 +1,7 @@
 fn main() {
     demo_if();
     demo_match();
+    demo_loops();
 }
 
 fn demo_if(){
@@ -31,10 +32,10 @@ fn demo_if(){
 }
 
 fn demo_match(){
+    let num = 50;
     // let num = 100;
     // let num = 200;
-
-    let num = 300;
+    // let num = 300;
 
     match num {
         100 => {
@@ -44,5 +45,60 @@ fn demo_match(){
         },
         200 => println!("Two hundred"),
         _ => println!("Not a hundred"),
+    }
+
+    match num {
+        50..100 => println!("Between 50 to 100"),
+        100..200 => println!("TBetween 100 to 200"),
+        _ => println!("who cares"),
+    }
+}
+
+fn demo_loops(){
+    let mut count = 0;
+    loop{
+        count += 1;
+        if count == 10{
+            break;
+        }
+        // delay
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+    println!("Value of count is {0}", count);
+
+    // Use while loop example
+    let mut count = 0;
+    while count < 10{
+        count += 1;
+    }
+    println!("Value of count is {0}", count);
+
+    // Use for loop example
+    for count in 0..10{
+        println!("Value of count is {0}", count);
+    }
+
+    // for loop with inclusive upper bound
+    for count in 0..=10{
+        println!("Value of count is {0}", count);
+    }
+
+    // for loop over array
+    let arr = [10,20,30,40,50];
+    for count in arr.iter(){
+        println!("Value of count is {0}", count);
+    }
+
+    // break out of named outer loop example
+    let mut count = 0;
+    'outer: loop {
+         loop {
+            println!("Value of count is {0}", count);
+            count += 1;
+            if count == 5{
+                break 'outer;
+            }
+
+        }
     }
 }
