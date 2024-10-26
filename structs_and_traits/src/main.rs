@@ -11,8 +11,20 @@ struct Worker{
 }
 
 impl Worker {
-    fn print(&self) {
-        
+    fn print(self: &Worker) {
+        println!("{0} earns {1} and it is {2} that he is a fulltime employee", self.name, self.salary, self.fulltime);
+    }
+
+    fn payrise(self: &mut Worker, amount: f64) {
+        self.salary += amount;
+    }
+
+    fn new(name: String, salary: f64, fulltime: bool) -> Worker {
+        Worker{
+            name,
+            salary,
+            fulltime
+        }
     }
 }
 
@@ -37,6 +49,12 @@ fn main() {
     let emp3 = build_emp(String::from("Jim"), 3000.0, true);
     print_emp(&emp3);
     println!("{0} {2} {1}", emp3.name, emp3.salary, emp3.fulltime);
+
+    // Use Worker struct
+    let mut emp4 = Worker::new(String::from("Joe"), 4000.0, false);
+    emp4.print();
+    emp4.payrise(500.0);
+    emp4.print();
     
 }
 
